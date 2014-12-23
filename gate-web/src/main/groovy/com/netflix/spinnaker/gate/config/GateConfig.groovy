@@ -22,6 +22,7 @@ import com.netflix.spinnaker.gate.retrofit.*
 import com.netflix.spinnaker.gate.services.EurekaLookupService
 import com.netflix.spinnaker.gate.services.internal.*
 import groovy.transform.CompileStatic
+import org.springframework.web.filter.ShallowEtagHeaderFilter
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.servlet.*
@@ -157,6 +158,7 @@ class GateConfig {
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with, content-type");
+        response.setHeader("Access-Control-Expose-Headers", "ETag");
         response.setHeader("Access-Control-Expose-Headers", [AUTHENTICATION_REDIRECT_HEADER_NAME].join(", "))
         chain.doFilter(req, res);
       }
@@ -165,6 +167,11 @@ class GateConfig {
 
       public void destroy() {}
     }
+  }
+
+  @Bean
+  Filter eTagFilter() {
+    new ShallowEtagHeaderFilter()
   }
 
   @Component
