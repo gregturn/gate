@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: gate # Embedded config server needs this setting sooner than can be reached via DEFAULT_PROPS
+  cloud:
+    config:
+      server:
+        prefix: /config
+        bootstrap: false   # Enable and bootstrap this service straight up from the github repo

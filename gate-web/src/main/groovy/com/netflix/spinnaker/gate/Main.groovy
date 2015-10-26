@@ -61,4 +61,5 @@ class Main extends SpringBootServletInitializer {
   ServletRegistrationBean hystrixEventStream() {
     new ServletRegistrationBean(new HystrixMetricsStreamServlet(), '/hystrix.stream')
   }
+
 }
