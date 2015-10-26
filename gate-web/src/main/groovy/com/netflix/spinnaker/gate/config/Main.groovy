@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.netflix.spinnaker.gate
+package com.netflix.spinnaker.gate.config
 import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet
 import com.netflix.spinnaker.hystrix.spectator.HystrixSpectatorConfig
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -60,4 +60,5 @@ class Main extends SpringBootServletInitializer {
   ServletRegistrationBean hystrixEventStream() {
     new ServletRegistrationBean(new HystrixMetricsStreamServlet(), '/hystrix.stream')
   }
+
 }
